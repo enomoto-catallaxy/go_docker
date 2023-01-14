@@ -7,6 +7,8 @@ import (
 	"os"
 	"time"
 
+	"go_docker/article"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -38,33 +40,5 @@ func connectDB() *sql.DB {
 func main() {
 	db := connectDB()
 	defer db.Close()
-	ReadAll(db)
-}
-
-//----------------------------------------------------------------------------------
-// TODO: ./article/article.goからimportする
-
-type Article struct {
-	id    int
-	title string
-	body  string
-}
-
-func ReadAll(db *sql.DB) {
-	var articles []Article
-	rows, err := db.Query("select * from article;")
-	if err != nil {
-		panic(err)
-	}
-	for rows.Next() {
-		article := Article{}
-		err = rows.Scan(&article.id, &article.title, &article.body)
-		if err != nil {
-			panic(err)
-		}
-		articles = append(articles, article)
-	}
-	rows.Close()
-
-	fmt.Println(articles)
+	article.ReadAll(db)
 }
