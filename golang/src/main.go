@@ -4,11 +4,13 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"time"
 
 	"go_docker/article"
 
+	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -37,8 +39,19 @@ func connectDB() *sql.DB {
 	return open(path, 100)
 }
 
+func runGin() {
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "pong",
+		})
+	})
+	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+}
+
 func main() {
 	db := connectDB()
 	defer db.Close()
 	article.ReadAll(db)
+	runGin()
 }
