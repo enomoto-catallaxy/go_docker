@@ -13,7 +13,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func RunGin(db *sql.DB) {
+func Run(db *sql.DB) {
 
 	articles := article.Get(db)
 

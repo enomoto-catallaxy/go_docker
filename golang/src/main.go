@@ -9,5 +9,5 @@ import (
 func main() {
 	db := routes.ConnectDB()
 	defer db.Close()
-	routes.RunGin(db)
+	routes.Run(db)
 }
