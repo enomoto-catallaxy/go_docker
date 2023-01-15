@@ -14,8 +14,7 @@ import (
 )
 
 func Run(db *sql.DB) {
-
-	articles := article.Get(db)
+	articles := article.ReadAll(db)
 
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
