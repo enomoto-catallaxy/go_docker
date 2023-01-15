@@ -3,7 +3,7 @@ package routes
 import (
 	"database/sql"
 	"fmt"
-	"go_docker/article"
+	"go_docker/api/article"
 	"log"
 	"net/http"
 	"os"
@@ -15,7 +15,7 @@ import (
 
 func RunGin(db *sql.DB) {
 
-	articles := article.ReadAll(db)
+	articles := article.Get(db)
 
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
