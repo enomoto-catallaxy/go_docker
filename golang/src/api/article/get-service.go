@@ -2,19 +2,18 @@ package article
 
 import (
 	"database/sql"
-
 	"go_docker/entity"
 )
 
-func ReadAll(db *sql.DB) []entity.Article {
+// NOTE: Serviceにてレスポンスに変換
+func Service(db *sql.DB) []GetArticleResponse {
 	var articles []entity.Article
-	rows, err := db.Query("select * from article;")
-	if err != nil {
-		panic(err)
-	}
+
+	rows := GetArticles(db)
+
 	for rows.Next() {
 		article := entity.Article{}
-		err = rows.Scan(&article.Id, &article.Title, &article.Body)
+		err := rows.Scan(&article.Id, &article.Title, &article.Body)
 		if err != nil {
 			panic(err)
 		}
@@ -22,5 +21,7 @@ func ReadAll(db *sql.DB) []entity.Article {
 	}
 	rows.Close()
 
-	return articles
+	response := Create(articles)
+
+	return response
 }
