@@ -2,24 +2,19 @@ package article
 
 import (
 	"database/sql"
-	"fmt"
+
+	"go_docker/entity"
 )
 
-type Article struct {
-	id    int
-	title string
-	body  string
-}
-
-func ReadAll(db *sql.DB) {
-	var articles []Article
+func ReadAll(db *sql.DB) []entity.Article {
+	var articles []entity.Article
 	rows, err := db.Query("select * from article;")
 	if err != nil {
 		panic(err)
 	}
 	for rows.Next() {
-		article := Article{}
-		err = rows.Scan(&article.id, &article.title, &article.body)
+		article := entity.Article{}
+		err = rows.Scan(&article.Id, &article.Title, &article.Body)
 		if err != nil {
 			panic(err)
 		}
@@ -27,5 +22,5 @@ func ReadAll(db *sql.DB) {
 	}
 	rows.Close()
 
-	fmt.Println(articles)
+	return articles
 }
