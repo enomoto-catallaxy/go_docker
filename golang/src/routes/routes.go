@@ -1,56 +1,33 @@
 package routes
 
 import (
-	"database/sql"
-	"fmt"
-	"go_docker/api/article"
-	"log"
-	"net/http"
-	"os"
-	"time"
+	"go_docker/controller"
+	"html/template"
+	"strings"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
 )
 
-func Run(db *sql.DB) {
-	articles := article.ReadAll(db)
-
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
-
-	r.GET("/articles", func(c *gin.Context) {
-		c.JSON(http.StatusOK, articles)
-	})
-
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+func nl2br(text string) template.HTML {
+	return template.HTML(strings.Replace(template.HTMLEscapeString(text), "\n", "<br />", -1))
 }
 
-func ConnectDB() *sql.DB {
-	var path string = fmt.Sprintf("%s:%s@tcp(db:3306)/%s?charset=utf8&parseTime=true",
-		os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_PASSWORD"),
-		os.Getenv("MYSQL_DATABASE"))
+func Run() {
 
-	return open(path, 100)
-}
+	// var student1 entity.Student
+	// db.Find(&student1).Scan(&student1)
 
-func open(path string, count uint) *sql.DB {
-	db, err := sql.Open("mysql", path)
-	if err != nil {
-		log.Fatal("open error:", err)
-	}
+	router := gin.Default()
 
-	if err = db.Ping(); err != nil {
-		time.Sleep(time.Second * 2)
-		count--
-		fmt.Printf("retry... count:%v\n", count)
-		return open(path, count)
-	}
+	router.SetFuncMap(template.FuncMap{
+		"nl2br": nl2br,
+	})
+	router.LoadHTMLGlob("template/*.html")
 
-	fmt.Println("db connected!!")
-	return db
+	router.GET("/", controller.Root)
+	router.GET("/ping", controller.Ping)
+	router.GET("/articles", controller.Articles)
+	router.POST("/article/:id", controller.Article)
+
+	router.Run(":8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
