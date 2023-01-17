@@ -23,7 +23,7 @@ func Run() {
 	router.GET("/", controller.Root)
 	router.GET("/ping", controller.Ping)
 	router.GET("/articles", controller.Articles)
-	router.POST("/article/:id", controller.Article)
+	router.GET("/article/:id", controller.Article)
 
 	router.Run(":8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
