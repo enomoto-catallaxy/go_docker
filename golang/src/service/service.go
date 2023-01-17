@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"go_docker/entity"
 
 	"github.com/gin-gonic/gin"
@@ -20,7 +21,9 @@ func GetArticle(db *gorm.DB, id gin.Params) entity.Article {
 
 	var article entity.Article
 
-	db.First(&article, id).Scan(&article)
+	fmt.Println(id)
+
+	db.Table("articles").Where("id = ?", id[0].Value).Scan(&article)
 
 	return article
 }
