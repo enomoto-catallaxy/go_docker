@@ -21,7 +21,6 @@ func Run() {
 	router.LoadHTMLGlob("template/*.html")
 
 	router.GET("/", controller.Root)
-	router.GET("/ping", controller.Ping)
 	router.GET("/articles", controller.Articles)
 	router.GET("/article/:id", controller.Article)
 

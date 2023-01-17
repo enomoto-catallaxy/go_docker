@@ -14,12 +14,6 @@ func Root(ctx *gin.Context) {
 	ctx.HTML(200, "index.html", nil)
 }
 
-func Ping(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "pong",
-	})
-}
-
 func Articles(c *gin.Context) {
 	db := database.ConnectDB()
 
