@@ -13,10 +13,6 @@ func nl2br(text string) template.HTML {
 }
 
 func Run() {
-
-	// var student1 entity.Student
-	// db.Find(&student1).Scan(&student1)
-
 	router := gin.Default()
 
 	router.SetFuncMap(template.FuncMap{
