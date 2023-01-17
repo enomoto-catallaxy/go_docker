@@ -1,6 +1,20 @@
 version: "3.8"
 
 services:
+  react:
+    build:
+      context: ./react-app
+      dockerfile: Dockerfile
+    container_name: react
+    tty: true
+    volumes:
+      - ./react-app:/app/react
+    command: "yarn start"
+    ports:
+      - 3000:3000
+    networks:
+      - golang_test_network
+
   go:
     container_name: go
     build:
