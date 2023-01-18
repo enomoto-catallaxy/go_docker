@@ -15,33 +15,68 @@ export const Seats = memo(() => {
       </h1>
       <Block>
         <Flex>
-          <DeskTop />
-          <DeskTop />
-          <DeskTop notVacant />
+          <DeskTop seatId={30} />
+          <DeskTop seatId={31} />
+          <DeskTop seatId={32} notVacant />
         </Flex>
 
         <Flex>
           <NoDeskTop />
           <NoDeskTop />
           <NoDeskTop />
+          <DeskTop seatId={33} />
+        </Flex>
+        <Flex>
+          <DeskTop seatId={29} />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <DeskTop seatId={34} />
+        </Flex>
+        <Flex>
+          <DeskTop seatId={28} />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <DeskTop seatId={35} />
+          <DeskTop seatId={36} />
+        </Flex>
+        <Flex>
+          <DeskTop seatId={27} />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
           <DeskTop />
         </Flex>
         <Flex>
+          <DeskTop seatId={26} />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
           <DeskTop />
-          <NoDeskTop />
-          <NoDeskTop />
-          <NoDeskTop />
+          <DeskTop />
+          <DeskTop />
           <DeskTop />
         </Flex>
-        <DeskTop />
-        <DeskTop />
-        <DeskTop />
-        <NoDeskTop />
         <Flex>
-          <DeskTop />
-          <DeskTop />
-          <DeskTop />
-          <DeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <DeskTop seatId={22} />
+          <DeskTop seatId={21} />
+        </Flex>
+        <Flex>
+          <DeskTop seatId={25} />
+          <DeskTop seatId={24} />
+          <DeskTop seatId={23} />
+          <NoDeskTop />
+          <DeskTop seatId={20} />
         </Flex>
       </Block>
     </Wrapper>
@@ -61,7 +96,7 @@ const Block = styled.div`
 `;
 
 const NoDeskTop = styled.div`
-  margin: 12px;
+  margin: 6px;
   height: ${SeatSize}px;
   width: ${SeatSize}px;
 `;

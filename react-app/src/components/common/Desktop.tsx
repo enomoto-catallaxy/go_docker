@@ -2,9 +2,12 @@ import { memo, useCallback, useMemo, useState } from "react";
 import { FaDesktop } from "react-icons/fa";
 import styled from "styled-components";
 import { SeatSize } from "../../const/Seat";
+import { Text } from "@mantine/core";
 
+//TODO: seatIdのオプショナルはずす
 interface Props {
   notVacant?: boolean;
+  seatId?: number;
 }
 
 export const DeskTop = memo((props: Props) => {
@@ -20,13 +23,21 @@ export const DeskTop = memo((props: Props) => {
 
   return (
     <Wrapper>
-      <FaDesktop onClick={handleClick} size="60px" color={vacantColor} />
+      <Text color="#black" fw={1000} ta="center">
+        {props.seatId}
+      </Text>
+
+      <FaDesktop
+        onClick={handleClick}
+        size="60px"
+        color={vacantColor}
+      ></FaDesktop>
     </Wrapper>
   );
 });
 
 const Wrapper = styled.div`
-  margin: 12px;
+  margin: 6px;
   height: ${SeatSize}px;
   width: ${SeatSize}px;
 `;
