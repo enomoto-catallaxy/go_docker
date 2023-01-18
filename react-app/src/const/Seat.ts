@@ -1,1 +1,1 @@
-export const SeatSize = 120;
+export const SeatSize = 86;

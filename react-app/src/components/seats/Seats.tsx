@@ -5,19 +5,20 @@ import { DeskTop } from "../common/Desktop";
 
 export const Seats = memo(() => {
   const today = new Date();
-
   const month = today.getMonth();
   const date = today.getDate();
+
   return (
     <Wrapper>
       <h1>
-        座席一覧 {month + 1}月{date}日
+        座席一覧 {month + 1}/{date}
       </h1>
+
       <Block>
         <Flex>
           <DeskTop seatId={30} />
           <DeskTop seatId={31} />
-          <DeskTop seatId={32} notVacant />
+          <DeskTop seatId={32} />
         </Flex>
 
         <Flex>
@@ -49,7 +50,7 @@ export const Seats = memo(() => {
           <NoDeskTop />
           <NoDeskTop />
           <NoDeskTop />
-          <DeskTop />
+          <DeskTop seatId={37} />
         </Flex>
         <Flex>
           <DeskTop seatId={26} />
@@ -59,10 +60,22 @@ export const Seats = memo(() => {
           <NoDeskTop />
           <NoDeskTop />
           <NoDeskTop />
-          <DeskTop />
-          <DeskTop />
-          <DeskTop />
-          <DeskTop />
+          <DeskTop seatId={38} />
+        </Flex>
+        <Flex>
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <NoDeskTop />
+          <DeskTop seatId={39} />
+          <DeskTop seatId={40} />
+          <DeskTop seatId={41} />
+          <DeskTop seatId={42} />
+          <DeskTop seatId={43} />
         </Flex>
         <Flex>
           <NoDeskTop />
@@ -84,7 +97,7 @@ export const Seats = memo(() => {
 });
 
 const Wrapper = styled.div`
-  padding-left: 24px;
+  padding: 24px;
 `;
 
 const Flex = styled.div`

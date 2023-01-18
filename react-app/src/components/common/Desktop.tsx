@@ -3,40 +3,58 @@ import { FaDesktop } from "react-icons/fa";
 import styled from "styled-components";
 import { SeatSize } from "../../const/Seat";
 import { Text } from "@mantine/core";
+import { RegisterModal } from "../seats/register/modal";
 
 //TODO: seatIdのオプショナルはずす
 interface Props {
-  notVacant?: boolean;
   seatId?: number;
 }
 
 export const DeskTop = memo((props: Props) => {
-  const [notVacant, setNotVacant] = useState(props.notVacant);
+  const [notVacant, setNotVacant] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleClick = useCallback(() => {
-    setNotVacant(true);
+    setOpenModal(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setOpenModal(false);
   }, []);
 
   const vacantColor = useMemo(() => {
-    return props.notVacant || notVacant ? "red" : "blue";
-  }, [props.notVacant, notVacant]);
+    return notVacant ? "red" : "blue";
+  }, [notVacant]);
+
+  const handleOk = useCallback(() => {
+    setNotVacant(true);
+    setOpenModal(false);
+  }, []);
 
   return (
-    <Wrapper>
-      <Text color="#black" fw={1000} ta="center">
-        {props.seatId}
-      </Text>
+    <>
+      <Wrapper>
+        <Text color="#black" fw={1000} ta="center" size="lg">
+          {props.seatId}
+        </Text>
+        <FaDesktop
+          onClick={handleClick}
+          size="80px"
+          color={vacantColor}
+        ></FaDesktop>
+      </Wrapper>
 
-      <FaDesktop
-        onClick={handleClick}
-        size="60px"
-        color={vacantColor}
-      ></FaDesktop>
-    </Wrapper>
+      <RegisterModal
+        open={openModal}
+        handleClose={handleCloseModal}
+        onOk={handleOk}
+      />
+    </>
   );
 });
 
 const Wrapper = styled.div`
+  padding: 6px;
   margin: 6px;
   height: ${SeatSize}px;
   width: ${SeatSize}px;
