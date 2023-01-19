@@ -23,6 +23,7 @@ func Run() {
 	router.GET("/", controller.Root)
 	router.GET("/articles", controller.Articles)
 	router.GET("/article/:id", controller.Article)
+	router.GET("/seat/:id", controller.Seat)
 
 	router.Run(":8080")
 }
