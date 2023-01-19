@@ -3,7 +3,8 @@ import { FaDesktop } from "react-icons/fa";
 import styled from "styled-components";
 import { SeatSize } from "../../../const/Seat";
 import { Text } from "@mantine/core";
-import { RegisterModal } from "../register/modal";
+import { SitdownModal } from "./modal/sitdownModal";
+import { StandUpModal } from "./modal/standupModal";
 
 //TODO: seatIdのオプショナルはずす
 interface Props {
@@ -26,8 +27,13 @@ export const DeskTop = memo((props: Props) => {
     return notVacant ? "red" : "blue";
   }, [notVacant]);
 
-  const handleOk = useCallback(() => {
+  const handleSitDownOk = useCallback(() => {
     setNotVacant(true);
+    setOpenModal(false);
+  }, []);
+
+  const handleStandUpOk = useCallback(() => {
+    setNotVacant(false);
     setOpenModal(false);
   }, []);
 
@@ -44,11 +50,19 @@ export const DeskTop = memo((props: Props) => {
         ></FaDesktop>
       </Wrapper>
 
-      <RegisterModal
-        open={openModal}
-        handleClose={handleCloseModal}
-        onOk={handleOk}
-      />
+      {!notVacant ? (
+        <SitdownModal
+          open={openModal}
+          handleClose={handleCloseModal}
+          onOk={handleSitDownOk}
+        />
+      ) : (
+        <StandUpModal
+          open={openModal}
+          handleClose={handleCloseModal}
+          onOk={handleStandUpOk}
+        />
+      )}
     </>
   );
 });
