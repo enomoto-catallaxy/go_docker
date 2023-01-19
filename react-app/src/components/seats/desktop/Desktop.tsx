@@ -6,9 +6,8 @@ import { Text } from "@mantine/core";
 import { SitdownModal } from "./modal/sitdownModal";
 import { StandUpModal } from "./modal/standupModal";
 
-//TODO: seatIdのオプショナルはずす
 interface Props {
-  seatId?: number;
+  seatId: number;
 }
 
 export const DeskTop = memo((props: Props) => {
