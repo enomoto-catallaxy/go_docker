@@ -1,9 +1,9 @@
 import { memo, useCallback, useMemo, useState } from "react";
 import { FaDesktop } from "react-icons/fa";
 import styled from "styled-components";
-import { SeatSize } from "../../const/Seat";
+import { SeatSize } from "../../../const/Seat";
 import { Text } from "@mantine/core";
-import { RegisterModal } from "../seats/register/modal";
+import { RegisterModal } from "../register/modal";
 
 //TODO: seatIdのオプショナルはずす
 interface Props {
