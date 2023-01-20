@@ -1,19 +1,33 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { Group } from "@mantine/core";
 import { Modal } from "antd";
 import styled from "styled-components";
+import axios from "axios";
 
 interface Props {
   open: boolean;
   handleClose: () => void;
   onOk: () => void;
+  seatId: number;
 }
 
 export const SitdownModal = memo((props: Props) => {
   const today = new Date();
   const month = today.getMonth();
   const date = today.getDate();
+
+  const [seatInfo, setSeatInfo] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      await axios.get(`seat/${props.seatId}`).then((response) => {
+        setSeatInfo(response.data);
+        console.log(seatInfo);
+      });
+    })();
+  }, [props.seatId, seatInfo]);
+
   return (
     // TODO: 予約している生徒に関するデータを表示
 

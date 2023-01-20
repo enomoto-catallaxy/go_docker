@@ -55,6 +55,15 @@ services:
     networks:
       - golang_test_network
 
+  nginx:
+    build: ./nginx
+    ports:
+      - "1234:1234"
+    depends_on:
+      - "go"
+    networks:
+      - golang_test_network
+
 volumes:
   mysql_test_volume:
     name: mysql_test_volume

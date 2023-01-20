@@ -17,5 +17,5 @@ type Student struct {
 	Finished_at_today time.Time
 	Memos             []Memo
 	SeatID            uint
-	Seat              Seat `gorm:"references:SeatID`
+	Seat              Seat
 }

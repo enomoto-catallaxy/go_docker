@@ -43,3 +43,14 @@ func Student(c *gin.Context) {
 	c.JSON(http.StatusOK, student)
 
 }
+
+func Seat(c *gin.Context) {
+	db := database.ConnectDB()
+	id := c.Params
+
+	seat := service.GetSeatById(db, id)
+
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+
+	c.JSON(http.StatusOK, seat)
+}

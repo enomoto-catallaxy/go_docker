@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback , useMemo, useState } from "react";
 import { FaDesktop } from "react-icons/fa";
 import styled from "styled-components";
 import { SeatSize } from "../../../const/Seat";
@@ -6,9 +6,8 @@ import { Text } from "@mantine/core";
 import { SitdownModal } from "./modal/sitdownModal";
 import { StandUpModal } from "./modal/standupModal";
 
-//TODO: seatIdのオプショナルはずす
 interface Props {
-  seatId?: number;
+  seatId: number;
 }
 
 export const DeskTop = memo((props: Props) => {
@@ -24,7 +23,7 @@ export const DeskTop = memo((props: Props) => {
   }, []);
 
   const vacantColor = useMemo(() => {
-    return notVacant ? "red" : "blue";
+    return notVacant ? "blue" : "#66FF66";
   }, [notVacant]);
 
   const handleSitDownOk = useCallback(() => {
@@ -55,6 +54,7 @@ export const DeskTop = memo((props: Props) => {
           open={openModal}
           handleClose={handleCloseModal}
           onOk={handleSitDownOk}
+          seatId={props.seatId}
         />
       ) : (
         <StandUpModal
