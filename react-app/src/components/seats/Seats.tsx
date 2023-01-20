@@ -14,5 +14,5 @@ export const Seats = memo(() => {
 
 const Wrapper = styled.div`
   padding: 24px;
-  background-color: rgb(213, 244, 244);
+  /* background-color: rgb(213, 244, 244); */
 `;
