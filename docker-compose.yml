@@ -56,6 +56,7 @@ services:
       - golang_test_network
 
   nginx:
+    container_name: nginx
     build: ./nginx
     ports:
       - "1234:1234"
