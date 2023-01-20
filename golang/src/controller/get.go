@@ -50,5 +50,7 @@ func Seat(c *gin.Context) {
 
 	seat := service.GetSeatById(db, id)
 
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+
 	c.JSON(http.StatusOK, seat)
 }
