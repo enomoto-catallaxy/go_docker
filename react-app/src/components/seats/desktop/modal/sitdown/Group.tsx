@@ -1,7 +1,6 @@
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { Group } from "@mantine/core";
 import styled from "styled-components";
-import axios from "axios";
 
 interface Props {
   open: boolean;
