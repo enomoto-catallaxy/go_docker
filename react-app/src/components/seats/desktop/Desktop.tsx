@@ -14,6 +14,7 @@ interface Props {
 export const DeskTop = memo((props: Props) => {
   const params = useDeskTop(props);
 
+  //TODO: SitdownModal,StandUpModalを一緒くたにせずに別コンポーネントにする
   return (
     <>
       <Wrapper>
