@@ -34,6 +34,8 @@ func open(path string) *gorm.DB {
 		log.Fatal("open error:", err)
 	}
 
+	// sqlDB.Close()
+
 	fmt.Println("db connected!!")
 	return db
 }

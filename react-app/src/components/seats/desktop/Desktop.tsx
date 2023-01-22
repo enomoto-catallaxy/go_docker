@@ -1,40 +1,18 @@
-import { memo, useCallback , useMemo, useState } from "react";
+import { memo } from "react";
 import { FaDesktop } from "react-icons/fa";
 import styled from "styled-components";
 import { SeatSize } from "../../../const/Seat";
 import { Text } from "@mantine/core";
-import { SitdownModal } from "./modal/sitdownModal";
+import { SitdownModal } from "./modal/sitdown/sitdownModal";
 import { StandUpModal } from "./modal/standupModal";
+import { useDeskTop } from "./useDeskTop";
 
 interface Props {
   seatId: number;
 }
 
 export const DeskTop = memo((props: Props) => {
-  const [notVacant, setNotVacant] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-
-  const handleClick = useCallback(() => {
-    setOpenModal(true);
-  }, []);
-
-  const handleCloseModal = useCallback(() => {
-    setOpenModal(false);
-  }, []);
-
-  const vacantColor = useMemo(() => {
-    return notVacant ? "blue" : "#66FF66";
-  }, [notVacant]);
-
-  const handleSitDownOk = useCallback(() => {
-    setNotVacant(true);
-    setOpenModal(false);
-  }, []);
-
-  const handleStandUpOk = useCallback(() => {
-    setNotVacant(false);
-    setOpenModal(false);
-  }, []);
+  const params = useDeskTop(props);
 
   return (
     <>
@@ -43,24 +21,24 @@ export const DeskTop = memo((props: Props) => {
           {props.seatId}
         </Text>
         <FaDesktop
-          onClick={handleClick}
+          onClick={params.handleClickFaDeskTop}
           size="80px"
-          color={vacantColor}
+          color={params.vacantColor}
         ></FaDesktop>
       </Wrapper>
 
-      {!notVacant ? (
+      {!params.notVacant ? (
         <SitdownModal
-          open={openModal}
-          handleClose={handleCloseModal}
-          onOk={handleSitDownOk}
-          seatId={props.seatId}
+          open={params.openSitdownModal}
+          handleClose={params.handleCloseSitdownModal}
+          onOk={params.handleSitDownOk}
+          seatId={params.seatId}
         />
       ) : (
         <StandUpModal
-          open={openModal}
-          handleClose={handleCloseModal}
-          onOk={handleStandUpOk}
+          open={params.openStandupModal}
+          handleClose={params.handleCloseStandupModal}
+          onOk={params.handleStandUpOk}
         />
       )}
     </>

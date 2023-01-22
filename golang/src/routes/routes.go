@@ -1,8 +1,10 @@
 package routes
 
 import (
-	"go_docker/controller"
+	"go_docker/database"
+	"go_docker/service"
 	"html/template"
+	"net/http"
 	"strings"
 	"time"
 
@@ -16,16 +18,44 @@ func nl2br(text string) template.HTML {
 
 func Run() {
 	router := gin.Default()
+	db := database.ConnectDB()
 
 	router.SetFuncMap(template.FuncMap{
 		"nl2br": nl2br,
 	})
 	router.LoadHTMLGlob("template/*.html")
 
-	router.GET("/", controller.Root)
-	router.GET("/articles", controller.Articles)
-	router.GET("/article/:id", controller.Article)
-	router.GET("/seat/:id", controller.Seat)
+	router.GET("/",
+		func(ctx *gin.Context) {
+			ctx.HTML(200, "index.html", nil)
+		},
+	)
+
+	router.GET("/articles", func(c *gin.Context) {
+
+		articles := service.GetArticles(db)
+
+		c.JSON(http.StatusOK, articles)
+
+	})
+
+	router.GET("/article/:id", func(c *gin.Context) {
+		id := c.Params
+
+		article := service.GetArticle(db, id)
+
+		c.JSON(http.StatusOK, article)
+	})
+
+	router.GET("/seat/:id", func(c *gin.Context) {
+		id := c.Params
+
+		seat := service.GetSeatById(db, id)
+
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+
+		c.JSON(http.StatusOK, seat)
+	})
 
 	arrowOrigins := []string{"http://localhost:3000"}
 
@@ -47,8 +77,10 @@ func Run() {
 			"",
 		},
 		AllowCredentials: false,
-		MaxAge:           24 * time.Hour,
+		MaxAge:           1 * time.Hour,
 	}))
 
 	router.Run(":8080")
+
+	db.Commit().Statement.ReflectValue.Close()
 }

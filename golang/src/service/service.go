@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"go_docker/entity"
 
 	"github.com/gin-gonic/gin"
@@ -28,8 +27,6 @@ func GetSeatById(db *gorm.DB, id gin.Params) entity.Seat {
 	var seat entity.Seat
 
 	db.Table("seats").Where("seat_id = ?", id[0].Value).Scan(&seat)
-
-	fmt.Println(seat)
 
 	return seat
 }
