@@ -3,7 +3,6 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	"go_docker/common"
 	"log"
 	"os"
 
@@ -17,8 +16,6 @@ func ConnectDB() *gorm.DB {
 		os.Getenv("MYSQL_DATABASE"))
 
 	db := open(path)
-
-	common.Migrate(db)
 
 	return db
 }
