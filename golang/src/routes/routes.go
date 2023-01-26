@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -67,20 +66,19 @@ func Run() {
 			"OPTIONS",
 		},
 		AllowHeaders: []string{
-			"Access-Control-Allow-Headers",
-			"Access-Control-Allow-Origin",
+			// "Access-Control-Allow-Headers",
+			// "Access-Control-Allow-Origin",
 			"Content-Type",
-			"Authorization",
-			"Origin",
+			// "Authorization",
+			// "Origin",
 		},
-		ExposeHeaders: []string{
-			"",
-		},
-		AllowCredentials: false,
-		MaxAge:           1 * time.Hour,
+		// ExposeHeaders: []string{
+		// 	"",
+		// },
+		// AllowCredentials: false,
 	}))
 
 	router.Run(":8080")
 
-	db.Commit().Statement.ReflectValue.Close()
+	// db.Commit().Statement.ReflectValue.Close()
 }

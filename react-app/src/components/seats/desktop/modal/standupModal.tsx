@@ -7,9 +7,10 @@ interface Props {
   open: boolean;
   handleClose: () => void;
   onOk: () => void;
+  seatId: number;
 }
 
-export const StandUpModal = memo((props: Props) => {
+export const StandupModal = memo((props: Props) => {
   const today = new Date();
   const month = today.getMonth();
   const date = today.getDate();

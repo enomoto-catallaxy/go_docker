@@ -1,6 +1,5 @@
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { Modal } from "antd";
-import axios from "axios";
 import { SitdownModalGroup } from "./Group";
 
 interface Props {
@@ -8,19 +7,11 @@ interface Props {
   handleClose: () => void;
   onOk: () => void;
   seatId: number;
+  seatInfo: any[];
 }
 
 export const SitdownModal = memo((props: Props) => {
-  const [seatInfo, setSeatInfo] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      await axios.get(`seat/${props.seatId}`).then((response) => {
-        setSeatInfo(response.data);
-        console.log(seatInfo);
-      });
-    })();
-  }, [props.seatId, seatInfo, props.open]);
+  console.log(props.seatInfo);
 
   return (
     // TODO: 予約している生徒に関するデータを表示

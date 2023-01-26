@@ -7,6 +7,7 @@ interface Props {
   handleClose: () => void;
   onOk: () => void;
   seatId: number;
+  seatInfo: any[];
 }
 
 export const SitdownModalGroup = memo((props: Props) => {
@@ -20,7 +21,7 @@ export const SitdownModalGroup = memo((props: Props) => {
         <h2>
           この席は{month + 1}/{date}現在、OOOさんが予約中です。
           <br />
-          {/* 予約を決定しますか？ seatInfo:{seatInfo} */}
+          {/* 予約を決定しますか？ seatInfo:{props.seatInfo} */}
         </h2>
       </Wrapper>
     </Group>
