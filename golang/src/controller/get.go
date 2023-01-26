@@ -2,10 +2,8 @@ package controller
 
 import (
 	"go_docker/database"
-	"go_docker/entity"
 	"go_docker/service"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -33,16 +31,16 @@ func Article(c *gin.Context) {
 
 }
 
-func Student(c *gin.Context) {
-	db := database.ConnectDB()
+// func Student(c *gin.Context) {
+// 	db := database.ConnectDB()
 
-	student := entity.Student{Grade: 2, First_name: "yamada", Last_name: "taro", Came_at_today: time.Now(), Finished_at_today: time.Now()}
+// 	student := entity.Student{Grade: 2, First_name: "yamada", Last_name: "taro", Came_at_today: time.Now(), Finished_at_today: time.Now()}
 
-	db.Create(&student)
+// 	db.Create(&student)
 
-	c.JSON(http.StatusOK, student)
+// 	c.JSON(http.StatusOK, student)
 
-}
+// }
 
 func Seat(c *gin.Context) {
 	db := database.ConnectDB()
