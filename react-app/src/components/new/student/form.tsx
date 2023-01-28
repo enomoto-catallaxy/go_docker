@@ -61,19 +61,19 @@ export const NewStudentForm = memo(() => {
       {contextHolder}
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 900 }}
+        labelCol={{ span: 12 }}
+        wrapperCol={{ span: 28 }}
+        style={{ maxWidth: 1500 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item
-          label="苗字"
+          label="姓名"
           name={["user", "firstName"]}
           hasFeedback
-          rules={[{ required: true, message: "Please input new faistName!" }]}
+          rules={[{ required: true, message: "姓名が入力されていません" }]}
         >
           <Input />
         </Form.Item>
@@ -82,7 +82,7 @@ export const NewStudentForm = memo(() => {
           label="名前"
           name={["user", "lastName"]}
           hasFeedback
-          rules={[{ required: true, message: "Please input new lastName!" }]}
+          rules={[{ required: true, message: "名前が入力されていません" }]}
         >
           <Input />
         </Form.Item>
@@ -91,11 +91,9 @@ export const NewStudentForm = memo(() => {
           label="学年"
           name={["user", "grade"]}
           hasFeedback
-          rules={[
-            { required: true, message: "Please input his or her grade!" },
-          ]}
+          rules={[{ required: true, message: "学年が入力されていません" }]}
         >
-          <Select placeholder="Please select a country">
+          <Select>
             <Option value={1}>1</Option>
             <Option value={2}>2</Option>
             <Option value={3}>3</Option>
@@ -103,7 +101,7 @@ export const NewStudentForm = memo(() => {
         </Form.Item>
 
         <Form.Item
-          label="マナビス番号"
+          label="マナビス生番号"
           name={["user", "manavisCode"]}
           hasFeedback
           rules={manavisCodeRules.digit}
@@ -113,7 +111,7 @@ export const NewStudentForm = memo(() => {
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            登録する
           </Button>
         </Form.Item>
       </Form>
