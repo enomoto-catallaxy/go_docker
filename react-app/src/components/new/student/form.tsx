@@ -76,7 +76,7 @@ export const NewStudentForm = memo(() => {
       >
         <Form.Item
           label="苗字"
-          name={["user", "faistName"]}
+          name={["user", "firstName"]}
           hasFeedback
           rules={[{ required: true, message: "Please input new faistName!" }]}
         >
