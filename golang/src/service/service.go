@@ -4,6 +4,7 @@ import (
 	"go_docker/database"
 	"go_docker/entity"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -27,6 +28,13 @@ func GetSeatById(db *gorm.DB, id gin.Params) entity.Seat {
 	return seat
 }
 
+func GetUserByManavisCode(db *gorm.DB, id string) database.User {
+	manavisCode, _ := strconv.Atoi(id)
+	var user database.User
+	db.Table("users").Where("manavis_code = ?", manavisCode).Scan(&user)
+	return user
+}
+
 func POSTNewUser(db *gorm.DB, id string, firstName string, lastName string, grade string) database.User {
 	manavisCode, _ := strconv.Atoi(id)
 	gradeNumber, _ := strconv.Atoi(grade)
@@ -39,4 +47,23 @@ func POSTNewUser(db *gorm.DB, id string, firstName string, lastName string, grad
 	db.Create(&newUser)
 
 	return newUser
+}
+
+func POSTWelecomeUesr(db *gorm.DB, id string) database.User {
+	manavisCode, _ := strconv.Atoi(id)
+
+	var user database.User
+	db.Table("users").Where("manavis_code = ?", manavisCode).Scan(&user)
+
+	comingTime := database.DayInfo{
+		ComeAt: time.Now(),
+		UserID: user.ID,
+	}
+	db.Create(&comingTime)
+
+	newUserDayInfo := append(user.DayInfo, comingTime)
+
+	user.DayInfo = newUserDayInfo
+	db.Save(&user)
+	return user
 }
