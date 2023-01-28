@@ -31,30 +31,31 @@ func Run() {
 	)
 
 	router.GET("/articles", func(c *gin.Context) {
-
 		articles := service.GetArticles(db)
-
 		c.JSON(http.StatusOK, articles)
-
 	})
 
 	router.GET("/article/:id", func(c *gin.Context) {
 		id := c.Params
-
 		article := service.GetArticle(db, id)
-
 		c.JSON(http.StatusOK, article)
 	})
 
-	router.GET("/seat/:id", func(c *gin.Context) {
+	router.POST("/new/student/:id", func(c *gin.Context) {
 		id := c.Params
-
-		seat := service.GetSeatById(db, id)
-
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-
-		c.JSON(http.StatusOK, seat)
+		newUser := service.POSTNewUser(db, id)
+		c.JSON(http.StatusOK, newUser)
 	})
+
+	// router.GET("/seat/:id", func(c *gin.Context) {
+	// 	id := c.Params
+
+	// 	seat := service.GetSeatById(db, id)
+
+	// 	c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+
+	// 	c.JSON(http.StatusOK, seat)
+	// })
 
 	arrowOrigins := []string{"http://localhost:3000"}
 

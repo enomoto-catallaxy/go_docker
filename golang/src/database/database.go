@@ -5,10 +5,27 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
+
+type DayInfo struct {
+	gorm.Model
+	ComeAt time.Time
+	GoHome time.Time
+	UserID uint
+}
+
+type User struct {
+	gorm.Model
+	Manavis_code int `gorm:"primaryKey"`
+	Grade        int
+	First_name   string
+	Last_name    string
+	DayInfo      []DayInfo `gorm:"foreignKey:UserID"`
+}
 
 func ConnectDB() *gorm.DB {
 	var path string = fmt.Sprintf("%s:%s@tcp(db:3306)/%s?charset=utf8&parseTime=true",
@@ -16,6 +33,8 @@ func ConnectDB() *gorm.DB {
 		os.Getenv("MYSQL_DATABASE"))
 
 	db := open(path)
+
+	db.AutoMigrate(&User{}, &DayInfo{})
 
 	return db
 }
