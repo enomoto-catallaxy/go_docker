@@ -20,6 +20,27 @@ func Run() {
 	router := gin.Default()
 	db := database.ConnectDB()
 
+	arrowOrigins := []string{"http://localhost:3000"}
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: arrowOrigins,
+		AllowMethods: []string{
+			"POST",
+			"GET",
+			"OPTIONS",
+		},
+		AllowHeaders: []string{
+			// "Access-Control-Allow-Headers",
+			// "Access-Control-Allow-Origin",
+			"Content-Type",
+			// "Authorization",
+			// "Origin",
+		},
+		// ExposeHeaders: []string{
+		// 	"",
+		// },
+		// AllowCredentials: false,
+	}))
+
 	router.SetFuncMap(template.FuncMap{
 		"nl2br": nl2br,
 	})
@@ -66,29 +87,5 @@ func Run() {
 	// 	c.JSON(http.StatusOK, seat)
 	// })
 
-	arrowOrigins := []string{"http://localhost:3000"}
-
-	router.Use(cors.New(cors.Config{
-		AllowOrigins: arrowOrigins,
-		AllowMethods: []string{
-			"POST",
-			"GET",
-			"OPTIONS",
-		},
-		AllowHeaders: []string{
-			// "Access-Control-Allow-Headers",
-			// "Access-Control-Allow-Origin",
-			"Content-Type",
-			// "Authorization",
-			// "Origin",
-		},
-		// ExposeHeaders: []string{
-		// 	"",
-		// },
-		// AllowCredentials: false,
-	}))
-
 	router.Run(":8080")
-
-	// db.Commit().Statement.ReflectValue.Close()
 }
