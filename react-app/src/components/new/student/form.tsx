@@ -5,7 +5,6 @@ import { Rule } from "antd/es/form";
 
 export const NewStudentForm = memo(() => {
   const { Option } = Select;
-  const [form] = Form.useForm();
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -29,7 +28,7 @@ export const NewStudentForm = memo(() => {
 
   const onFinish = async (v: {
     user: {
-      faistName: string;
+      firstName: string;
       lastName: string;
       grade: number;
       manavisCode: string;
@@ -37,11 +36,18 @@ export const NewStudentForm = memo(() => {
   }) => {
     const params = parseInt(v.user.manavisCode.trim());
 
-    //TODO エラー箇所直す（APIはコールできている）
     await axios
-      .post(`new/student/${params}`, {
-        headers: { "Content-Type": "application/json" },
-      })
+      .post(
+        `new/student/${params}/${v.user.grade}?fn=${v.user.firstName}&ln=${v.user.lastName}`,
+        // {
+        //   firstName: v.user.firstName,
+        //   lastName: v.user.lastName,
+        //   grade: String(v.user.grade),
+        // },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       .catch((err) => {
         if (err) {
           messageApi.info("登録に失敗しました");
@@ -111,13 +117,7 @@ export const NewStudentForm = memo(() => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            onClick={() => {
-              console.log(form.getFieldsValue());
-            }}
-          >
+          <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>

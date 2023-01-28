@@ -27,13 +27,14 @@ func GetSeatById(db *gorm.DB, id gin.Params) entity.Seat {
 	return seat
 }
 
-func POSTNewUser(db *gorm.DB, id gin.Params) database.User {
-	manavisCode, _ := strconv.Atoi(id[0].Value)
+func POSTNewUser(db *gorm.DB, id string, firstName string, lastName string, grade string) database.User {
+	manavisCode, _ := strconv.Atoi(id)
+	gradeNumber, _ := strconv.Atoi(grade)
 	newUser := database.User{
 		Manavis_code: manavisCode,
-		Grade:        1,
-		First_name:   "榎本",
-		Last_name:    "東悟",
+		Grade:        gradeNumber,
+		First_name:   firstName,
+		Last_name:    lastName,
 	}
 	db.Create(&newUser)
 

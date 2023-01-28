@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"go_docker/database"
 	"go_docker/service"
 	"html/template"
@@ -41,9 +42,17 @@ func Run() {
 		c.JSON(http.StatusOK, article)
 	})
 
-	router.POST("/new/student/:id", func(c *gin.Context) {
-		id := c.Params
-		newUser := service.POSTNewUser(db, id)
+	router.POST("/new/student/:id/:grade", func(c *gin.Context) {
+		id := c.Param("id")
+		grade := c.Param("grade")
+
+		faistName := c.Query("fn")
+		lastName := c.Query("ln")
+
+		fmt.Println(c.Params)
+		fmt.Println(c)
+
+		newUser := service.POSTNewUser(db, id, faistName, lastName, grade)
 		c.JSON(http.StatusOK, newUser)
 	})
 
