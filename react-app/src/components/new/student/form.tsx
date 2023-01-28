@@ -39,11 +39,6 @@ export const NewStudentForm = memo(() => {
     await axios
       .post(
         `new/student/${params}/${v.user.grade}?fn=${v.user.firstName}&ln=${v.user.lastName}`,
-        // {
-        //   firstName: v.user.firstName,
-        //   lastName: v.user.lastName,
-        //   grade: String(v.user.grade),
-        // },
         {
           headers: { "Content-Type": "application/json" },
         }
