@@ -13,8 +13,8 @@ import (
 
 type DayInfo struct {
 	gorm.Model
-	ComeAt time.Time
-	GoHome time.Time
+	ComeAt *time.Time
+	GoHome *time.Time
 	UserID uint
 }
 

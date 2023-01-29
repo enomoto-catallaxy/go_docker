@@ -79,6 +79,7 @@ func Run() {
 
 	router.POST("/welcome/:id", func(c *gin.Context) {
 		id := c.Param("id")
+
 		user := service.POSTWelecomeUesr(db, id)
 		c.JSON(http.StatusOK, user)
 	})

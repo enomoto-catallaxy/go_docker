@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"go_docker/database"
 	"go_docker/entity"
 	"strconv"
@@ -53,17 +54,25 @@ func POSTWelecomeUesr(db *gorm.DB, id string) database.User {
 	manavisCode, _ := strconv.Atoi(id)
 
 	var user database.User
-	db.Table("users").Where("manavis_code = ?", manavisCode).Scan(&user)
+	err := db.Table("users").Where("manavis_code = ?", manavisCode).First(&user).Error
+	if err == gorm.ErrRecordNotFound {
+		fmt.Println("レコードが見つかりません")
+	} else if err != nil {
+		fmt.Println("エラーが発生しました")
+	}
 
+	now := time.Now()
 	comingTime := database.DayInfo{
-		ComeAt: time.Now(),
+		ComeAt: &now,
 		UserID: user.ID,
 	}
 	db.Create(&comingTime)
 
-	newUserDayInfo := append(user.DayInfo, comingTime)
+	newDayInfo := append(user.DayInfo, comingTime)
 
-	user.DayInfo = newUserDayInfo
+	fmt.Println(newDayInfo)
+
+	user.DayInfo = newDayInfo
 	db.Save(&user)
 	return user
 }
