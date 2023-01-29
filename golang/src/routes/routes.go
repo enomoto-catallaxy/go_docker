@@ -86,7 +86,6 @@ func Run() {
 			c.JSON(http.StatusBadRequest, user)
 		} else {
 			c.JSON(http.StatusOK, user)
-
 		}
 	})
 
