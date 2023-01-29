@@ -83,6 +83,17 @@ func Run() {
 		}
 	})
 
+	router.POST("/goodbye/:id", func(c *gin.Context) {
+		id := c.Param("id")
+		manavisCode, _ := strconv.Atoi(id)
+		user := service.POSTGoodbyeUesr(db, id)
+		if user.Manavis_code != manavisCode {
+			c.JSON(http.StatusBadRequest, user)
+		} else {
+			c.JSON(http.StatusOK, user)
+		}
+	})
+
 	// router.GET("/seat/:id", func(c *gin.Context) {
 	// 	id := c.Params
 

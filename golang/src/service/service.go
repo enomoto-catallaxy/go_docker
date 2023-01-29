@@ -86,3 +86,32 @@ func POSTWelecomeUesr(db *gorm.DB, id string) database.User {
 	db.Save(&user)
 	return user
 }
+
+// TODO : 来校時に登録したレコードにupdateするように修正
+func POSTGoodbyeUesr(db *gorm.DB, id string) database.User {
+	manavisCode, _ := strconv.Atoi(id)
+
+	var user database.User
+	err := db.Table("users").Where("manavis_code = ?", manavisCode).First(&user).Error
+	if err == gorm.ErrRecordNotFound {
+		fmt.Println("レコードが見つかりません")
+		return user
+	} else if err != nil {
+		fmt.Println("エラーが発生しました")
+		return user
+	}
+
+	now := time.Now()
+	comingTime := database.DayInfo{
+		GoHome: &now,
+		UserID: user.ID,
+	}
+	db.Create(&comingTime)
+
+	newDayInfo := append(user.DayInfo, comingTime)
+
+	fmt.Println(newDayInfo)
+	user.DayInfo = newDayInfo
+	db.Save(&user)
+	return user
+}

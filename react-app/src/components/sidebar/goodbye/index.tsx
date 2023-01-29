@@ -2,9 +2,9 @@ import { BiWalk } from "react-icons/bi";
 import { memo } from "react";
 import styled from "styled-components";
 
-export const SideBarGoHome = memo(() => {
+export const SideBarGoodbye = memo(() => {
   const handleClick = () => {
-    window.location.href = "/welcome";
+    window.location.href = "/goodbye";
   };
 
   return (

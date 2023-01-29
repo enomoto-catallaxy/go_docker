@@ -1,14 +1,14 @@
 import { memo } from "react";
 import styled from "styled-components";
 import { SideBarRegister } from "./admin/register";
-import { SideBarGoHome } from "./go-home";
+import { SideBarGoodbye } from "./goodbye";
 import { SideBarWelcome } from "./welcome";
 
 export const SideBar = memo(() => {
   return (
     <Wrapper>
       <SideBarWelcome />
-      <SideBarGoHome />
+      <SideBarGoodbye />
       <SideBarRegister />
     </Wrapper>
   );

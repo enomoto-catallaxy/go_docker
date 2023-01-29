@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
+import { Goodbye } from "./components/goodbye";
 import { Home } from "./components/home/Home";
 import { NewStudent } from "./components/new/student";
 import { Seats } from "./components/seats/Seats";
@@ -17,6 +18,7 @@ function App() {
             <Route path="/seats" element={<Seats />} />
             <Route path="/new/student" element={<NewStudent />} />
             <Route path="/welcome" element={<Welcome />} />
+            <Route path="/goodbye" element={<Goodbye />} />
           </Routes>
         </BrowserRouter>
       </Content>
