@@ -57,8 +57,10 @@ func POSTWelecomeUesr(db *gorm.DB, id string) database.User {
 	err := db.Table("users").Where("manavis_code = ?", manavisCode).First(&user).Error
 	if err == gorm.ErrRecordNotFound {
 		fmt.Println("レコードが見つかりません")
+		return user
 	} else if err != nil {
 		fmt.Println("エラーが発生しました")
+		return user
 	}
 
 	now := time.Now()
@@ -71,7 +73,6 @@ func POSTWelecomeUesr(db *gorm.DB, id string) database.User {
 	newDayInfo := append(user.DayInfo, comingTime)
 
 	fmt.Println(newDayInfo)
-
 	user.DayInfo = newDayInfo
 	db.Save(&user)
 	return user

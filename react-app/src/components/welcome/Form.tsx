@@ -31,8 +31,6 @@ export const WelcomeForm = memo(() => {
   }) => {
     const params = parseInt(v.user.manavisCode.trim());
 
-    console.log(params);
-
     await axios
       .post(`welcome/${params}`, {
         headers: { "Content-Type": "application/json" },
@@ -40,8 +38,11 @@ export const WelcomeForm = memo(() => {
       .catch((err) => {
         if (err) {
           messageApi.info("登録に失敗しました");
-        } else {
-          messageApi.info("登録に成功しました");
+        }
+      })
+      .then((res) => {
+        if (res) {
+          messageApi.success("ようこそ");
         }
       });
   };
