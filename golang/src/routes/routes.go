@@ -5,6 +5,7 @@ import (
 	"go_docker/service"
 	"html/template"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/gin-contrib/cors"
@@ -79,9 +80,14 @@ func Run() {
 
 	router.POST("/welcome/:id", func(c *gin.Context) {
 		id := c.Param("id")
-
+		manavisCode, _ := strconv.Atoi(id)
 		user := service.POSTWelecomeUesr(db, id)
-		c.JSON(http.StatusOK, user)
+		if user.Manavis_code != manavisCode {
+			c.JSON(http.StatusBadRequest, user)
+		} else {
+			c.JSON(http.StatusOK, user)
+
+		}
 	})
 
 	// router.GET("/seat/:id", func(c *gin.Context) {
