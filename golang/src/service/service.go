@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go_docker/database"
 	"go_docker/entity"
+	"net/http"
 	"strconv"
 	"time"
 
@@ -36,9 +37,18 @@ func GetUserByManavisCode(db *gorm.DB, id string) database.User {
 	return user
 }
 
-func POSTNewUser(db *gorm.DB, id string, firstName string, lastName string, grade string) database.User {
+func POSTNewUser(c *gin.Context, db *gorm.DB, id string, firstName string, lastName string, grade string) {
 	manavisCode, _ := strconv.Atoi(id)
 	gradeNumber, _ := strconv.Atoi(grade)
+
+	var user database.User
+	db.Table("users").Where("manavis_code = ?", manavisCode).First(&user)
+	if user.Manavis_code == manavisCode {
+		c.JSON(http.StatusBadRequest, user)
+		fmt.Printf("すでにマナビス生番号%dの生徒が存在します", manavisCode)
+		return
+	}
+
 	newUser := database.User{
 		Manavis_code: manavisCode,
 		Grade:        gradeNumber,
@@ -46,8 +56,7 @@ func POSTNewUser(db *gorm.DB, id string, firstName string, lastName string, grad
 		Last_name:    lastName,
 	}
 	db.Create(&newUser)
-
-	return newUser
+	c.JSON(http.StatusOK, newUser)
 }
 
 func POSTWelecomeUesr(db *gorm.DB, id string) database.User {

@@ -46,8 +46,11 @@ export const NewStudentForm = memo(() => {
       .catch((err) => {
         if (err) {
           messageApi.info("登録に失敗しました");
-        } else {
-          messageApi.info("登録に成功しました");
+        }
+      })
+      .then((res) => {
+        if (res) {
+          messageApi.success("登録に成功しました");
         }
       });
   };

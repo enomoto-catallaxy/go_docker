@@ -69,13 +69,7 @@ func Run() {
 		faistName := c.Query("fn")
 		lastName := c.Query("ln")
 
-		// AlreadyUser := service.GetUserByManavisCode(db, id)
-		// if AlreadyUser != nil {
-		// 	c.JSON(http.StatusBadRequest, AlreadyUser)
-		// }
-
-		newUser := service.POSTNewUser(db, id, faistName, lastName, grade)
-		c.JSON(http.StatusOK, newUser)
+		service.POSTNewUser(c, db, id, faistName, lastName, grade)
 	})
 
 	router.POST("/welcome/:id", func(c *gin.Context) {
