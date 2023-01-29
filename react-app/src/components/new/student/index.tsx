@@ -4,15 +4,19 @@ import styled from "styled-components";
 
 export const NewStudent = memo(() => {
   return (
-    <>
+    <Wrapper0>
       <Title>【新規入会】生徒の情報を入力してください</Title>
 
       <Wrapper>
         <NewStudentForm />
       </Wrapper>
-    </>
+    </Wrapper0>
   );
 });
+
+const Wrapper0 = styled.div`
+  height: 100vh;
+`;
 
 const Title = styled.h1`
   display: flex;
