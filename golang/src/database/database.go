@@ -13,14 +13,14 @@ import (
 
 type DayInfo struct {
 	gorm.Model
-	ComeAt time.Time
-	GoHome time.Time
+	ComeAt *time.Time
+	GoHome *time.Time
 	UserID uint
 }
 
 type User struct {
 	gorm.Model
-	Manavis_code int `gorm:"primaryKey"`
+	Manavis_code int `gorm:"unique"`
 	Grade        int
 	First_name   string
 	Last_name    string
@@ -49,8 +49,6 @@ func open(path string) *gorm.DB {
 	if err != nil {
 		log.Fatal("open error:", err)
 	}
-
-	// sqlDB.Close()
 
 	fmt.Println("db connected!!")
 	return db

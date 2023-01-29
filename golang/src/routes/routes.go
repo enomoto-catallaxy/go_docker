@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"go_docker/database"
 	"go_docker/service"
 	"html/template"
@@ -19,6 +18,27 @@ func nl2br(text string) template.HTML {
 func Run() {
 	router := gin.Default()
 	db := database.ConnectDB()
+
+	arrowOrigins := []string{"http://localhost:3000"}
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: arrowOrigins,
+		AllowMethods: []string{
+			"POST",
+			"GET",
+			"OPTIONS",
+		},
+		AllowHeaders: []string{
+			// "Access-Control-Allow-Headers",
+			// "Access-Control-Allow-Origin",
+			"Content-Type",
+			// "Authorization",
+			// "Origin",
+		},
+		// ExposeHeaders: []string{
+		// 	"",
+		// },
+		// AllowCredentials: false,
+	}))
 
 	router.SetFuncMap(template.FuncMap{
 		"nl2br": nl2br,
@@ -45,15 +65,23 @@ func Run() {
 	router.POST("/new/student/:id/:grade", func(c *gin.Context) {
 		id := c.Param("id")
 		grade := c.Param("grade")
-
 		faistName := c.Query("fn")
 		lastName := c.Query("ln")
 
-		fmt.Println(c.Params)
-		fmt.Println(c)
+		// AlreadyUser := service.GetUserByManavisCode(db, id)
+		// if AlreadyUser != nil {
+		// 	c.JSON(http.StatusBadRequest, AlreadyUser)
+		// }
 
 		newUser := service.POSTNewUser(db, id, faistName, lastName, grade)
 		c.JSON(http.StatusOK, newUser)
+	})
+
+	router.POST("/welcome/:id", func(c *gin.Context) {
+		id := c.Param("id")
+
+		user := service.POSTWelecomeUesr(db, id)
+		c.JSON(http.StatusOK, user)
 	})
 
 	// router.GET("/seat/:id", func(c *gin.Context) {
@@ -66,29 +94,5 @@ func Run() {
 	// 	c.JSON(http.StatusOK, seat)
 	// })
 
-	arrowOrigins := []string{"http://localhost:3000"}
-
-	router.Use(cors.New(cors.Config{
-		AllowOrigins: arrowOrigins,
-		AllowMethods: []string{
-			"POST",
-			"GET",
-			"OPTIONS",
-		},
-		AllowHeaders: []string{
-			// "Access-Control-Allow-Headers",
-			// "Access-Control-Allow-Origin",
-			"Content-Type",
-			// "Authorization",
-			// "Origin",
-		},
-		// ExposeHeaders: []string{
-		// 	"",
-		// },
-		// AllowCredentials: false,
-	}))
-
 	router.Run(":8080")
-
-	// db.Commit().Statement.ReflectValue.Close()
 }
