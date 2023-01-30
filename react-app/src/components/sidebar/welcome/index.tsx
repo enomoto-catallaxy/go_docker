@@ -20,7 +20,8 @@ const Wrapper = styled.div`
   height: 48px;
   /* padding-left: -6px;
   padding-right: -6px; */
-  margin-bottom: 24px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: space-evenly;
 
