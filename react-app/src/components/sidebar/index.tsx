@@ -1,6 +1,6 @@
 import { memo } from "react";
 import styled from "styled-components";
-import { SideBarRegister } from "./admin/register";
+import { SideBarAdmin } from "./admin";
 import { SideBarGoodbye } from "./goodbye";
 import { SideBarWelcome } from "./welcome";
 
@@ -9,7 +9,8 @@ export const SideBar = memo(() => {
     <Wrapper>
       <SideBarWelcome />
       <SideBarGoodbye />
-      <SideBarRegister />
+      {/* <SideBarRegister /> */}
+      <SideBarAdmin />
     </Wrapper>
   );
 });
