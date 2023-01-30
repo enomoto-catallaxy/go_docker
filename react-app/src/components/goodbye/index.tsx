@@ -22,10 +22,11 @@ const Title = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 84px;
 `;
 
 const Wrapper = styled.div`
-  padding-top: 100px;
+  padding-top: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
