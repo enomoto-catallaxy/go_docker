@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Goodbye } from "./components/goodbye";
 import { Home } from "./components/home/Home";
 import { NewStudent } from "./components/new/student";
+import { Serach } from "./components/search";
 import { Seats } from "./components/seats/Seats";
 import { SideBar } from "./components/sidebar";
 import { Welcome } from "./components/welcome";
@@ -19,6 +20,7 @@ function App() {
             <Route path="/new/student" element={<NewStudent />} />
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/goodbye" element={<Goodbye />} />
+            <Route path="/search" element={<Serach />} />
           </Routes>
         </BrowserRouter>
       </Content>
