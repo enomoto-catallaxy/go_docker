@@ -9,7 +9,6 @@ export const SideBar = memo(() => {
     <Wrapper>
       <SideBarWelcome />
       <SideBarGoodbye />
-      {/* <SideBarRegister /> */}
       <SideBarAdmin />
     </Wrapper>
   );
