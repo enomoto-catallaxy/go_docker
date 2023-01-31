@@ -19,7 +19,7 @@ const Wrapper0 = styled.div`
 `;
 
 const Title = styled.h1`
-  padding-top: 84px;
+  padding-top: 72px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -2,21 +2,53 @@ import { DiAptana } from "react-icons/di";
 import { memo } from "react";
 import styled from "styled-components";
 import { Popover } from "antd";
-import { BiUserPlus } from "react-icons/bi";
-import { AiOutlineFileSearch } from "react-icons/ai";
 
 export const SideBarAdmin = memo(() => {
   const handleToRegiserForm = () => {
     window.location.href = "/new/student";
   };
+  const handleToSearch = () => {
+    window.location.href = "/search";
+  };
 
   const content = (
     <>
       <Icons onClick={handleToRegiserForm}>
-        <BiUserPlus size={48}></BiUserPlus>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="44"
+          height="44"
+          viewBox="0 0 24 24"
+          stroke-width="2.5"
+          stroke="#000000"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+          <path d="M16 11h6m-3 -3v6" />
+        </svg>
       </Icons>
-      <Icons onClick={handleToRegiserForm}>
-        <AiOutlineFileSearch size={48}></AiOutlineFileSearch>
+      <Icons onClick={handleToSearch}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="44"
+          height="44"
+          viewBox="0 0 24 24"
+          stroke-width="2.5"
+          stroke="#000000"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <circle cx="12" cy="7" r="4" />
+          <path d="M6 21v-2a4 4 0 0 1 4 -4h1" />
+          <circle cx="16.5" cy="17.5" r="2.5" />
+          <path d="M18.5 19.5l2.5 2.5" />
+        </svg>
       </Icons>
     </>
   );
@@ -33,24 +65,22 @@ export const SideBarAdmin = memo(() => {
 const Wrapper = styled.div`
   width: 100%;
   height: 48px;
-  /* padding-left: -6px;
-  padding-right: -6px; */
-  margin-top: 30px;
-  margin-bottom: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   display: flex;
   justify-content: space-evenly;
 
   :hover {
     cursor: pointer;
-    color: blue;
+    background-color: #efe9e9 !important;
   }
 `;
 
 const Icons = styled.div`
-  margin-bottom: 10%;
+  padding-bottom: 10%;
 
   :hover {
     cursor: pointer;
-    color: blue;
+    background-color: #efe9e9 !important;
   }
 `;

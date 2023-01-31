@@ -10,8 +10,8 @@ export const SideBarGoodbye = memo(() => {
     <Wrapper onClick={handleClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="44"
-        height="44"
+        width="60"
+        height="60"
         viewBox="0 0 24 24"
         stroke-width="2.5"
         stroke="#000000"
@@ -32,16 +32,14 @@ export const SideBarGoodbye = memo(() => {
 const Wrapper = styled.div`
   width: 100%;
   height: 48px;
-  /* padding-left: -6px;
-  padding-right: -6px; */
-  margin-top: 30px;
-  margin-bottom: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   display: flex;
   justify-content: space-evenly;
 
   :hover {
     cursor: pointer;
-    color: blue;
+    background-color: #efe9e9 !important;
   }
 `;
 
