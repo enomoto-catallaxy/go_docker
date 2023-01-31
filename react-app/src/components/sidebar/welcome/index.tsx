@@ -43,6 +43,8 @@ const Wrapper = styled.div`
   }
 `;
 
-const Title = styled.h2`
+const Title = styled.div`
   height: 48px;
+  font-size: 36px;
+  font-weight: 700;
 `;
