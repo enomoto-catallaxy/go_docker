@@ -6,25 +6,39 @@ import { NewStudent } from "./components/new/student";
 import { Serach } from "./components/search";
 import { Seats } from "./components/seats/Seats";
 import { SideBar } from "./components/sidebar";
+import { ProductPage } from "./components/tmp/ProductPage";
 import { Welcome } from "./components/welcome";
 
 function App() {
   return (
-    <Wrapper>
-      <SideBar />
-      <Content>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/seats" element={<Seats />} />
-            <Route path="/new/student" element={<NewStudent />} />
-            <Route path="/welcome" element={<Welcome />} />
-            <Route path="/goodbye" element={<Goodbye />} />
-            <Route path="/search" element={<Serach />} />
-          </Routes>
-        </BrowserRouter>
-      </Content>
-    </Wrapper>
+    // <Wrapper>
+    //   <SideBar />
+    //   <Content>
+    //     <BrowserRouter>
+    //       <Routes>
+    //         <Route path="/" element={<Home />} />
+    //         <Route path="/seats" element={<Seats />} />
+    //         <Route path="/new/student" element={<NewStudent />} />
+    //         <Route path="/welcome" element={<Welcome />} />
+    //         <Route path="/goodbye" element={<Goodbye />} />
+    //         <Route path="/search" element={<Serach />} />
+    //         <Route path="/product" element={<ProductPage />} />
+    //       </Routes>
+    //     </BrowserRouter>
+    //   </Content>
+    // </Wrapper>
+
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/seats" element={<Seats />} />
+        <Route path="/new/student" element={<NewStudent />} />
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/goodbye" element={<Goodbye />} />
+        <Route path="/search" element={<Serach />} />
+        <Route path="/products" element={<ProductPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
