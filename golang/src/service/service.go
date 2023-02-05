@@ -115,3 +115,16 @@ func POSTGoodbyeUesr(db *gorm.DB, id string) database.User {
 	db.Save(&user)
 	return user
 }
+
+func GetUserByGrade(c *gin.Context, db *gorm.DB, grade int) {
+	var results []map[string]interface{}
+	err := db.Table("users").Where("grade = ?", grade).Find(&results).Error
+	if err != nil {
+		fmt.Println("レコードが見つかりません")
+		c.JSON(http.StatusBadRequest, results)
+		return
+	}
+
+	fmt.Println(results)
+	c.JSON(http.StatusOK, results)
+}

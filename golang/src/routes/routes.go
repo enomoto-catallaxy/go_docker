@@ -94,6 +94,13 @@ func Run() {
 		}
 	})
 
+	router.GET("/search/student/:grade", func(c *gin.Context) {
+		grade_param := c.Param("grade")
+		grade, _ := strconv.Atoi(grade_param)
+
+		service.GetUserByGrade(c, db, grade)
+	})
+
 	// router.GET("/seat/:id", func(c *gin.Context) {
 	// 	id := c.Params
 
